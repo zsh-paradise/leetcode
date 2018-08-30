@@ -1,4 +1,4 @@
-package Test1;
+package test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ import java.util.Map;
  因为 nums[0] + nums[1] = 2 + 7 = 9
  所以返回 [0, 1]
  */
-public class test1 {
+public class Test1 {
     //时间复杂度O(n*n)  空间复杂度 O（1）
     public static int[] twoSum1(int[] nums, int target) {
         int size = nums.length;
