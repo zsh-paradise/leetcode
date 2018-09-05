@@ -1,5 +1,8 @@
 package test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by zsh_paradise on 2018/8/30.
  *
@@ -45,8 +48,47 @@ package test;
  1 <= N <= 10^9
  */
 public class Test868 {
+    //我写的第一中方法思路其实和大多数的不一样，我是利用hashmap的key没法重复的特性，
+    // 存储了最后一个0和1的下标，然后进行计算。转换使用了java的类
     public static int binaryGap(int N) {
+        int distance = 0 ;
+        String[] s = Integer.toBinaryString(N).split("");
+        Map<String,Integer> map = new HashMap<>(16);
+        for (int i = 0; i <s.length ; i++) {
+            if("1".equals(s[i])&&map.containsKey("1")){
+                int temp = i-map.get("1");
+                if(temp >distance){
+                    distance = temp ;
+                }
+            }
+            map.put(s[i],i);
+        }
 
-        throw new IllegalArgumentException("no solutation");
+
+        return distance;
+    }
+
+    public static int binaryGap1(int N) {
+        int[] A = new int[32];
+        int[] B = new int[32];
+        int t = 0;
+        for(int i = 0; i < 32; ++i){
+            if(((N >> i) & 1) != 0){
+                A[t++] = i;
+                B[t++]=1;
+            }else{
+                B[t++] = 0 ;
+            }
+        }
+        int ans = 0;
+        for (int i = 0; i < t - 1; ++i) {
+            ans = Math.max(ans, A[i + 1] - A[i]);
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        //System.out.println(binaryGap(22));
+        binaryGap1(33);
     }
 }
