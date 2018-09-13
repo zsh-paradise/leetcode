@@ -1,5 +1,9 @@
 package test;
 
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+
 /**
  * Created by zsh_paradise on 2018/9/6.
  * 18372016136
@@ -39,7 +43,53 @@ package test;
  答案保证小于 2 ^ 31
  */
 public class Test874 {
-    public int robotSim(int[] commands, int[][] obstacles) {
-
+    public static int robotSim(int[] commands, int[][] obstacles) {
+        //确定方向坐标，[dx[],dy[]]就是每一步的行为点，{{dx[0],dx[0]},{dx[0],{dx[0]}}} 这表示向北走了2两部
+        int[]  dx =  new int[]{0,1,0,-1};
+        int[]  dy = new int[]{1,0,-1,0};
+        int x = 0 , y=0,di=0 ;
+        //获取路障点， 通过+3000 和<<16 等数据编码，把一个向量转变为一个数值
+        Set<Long> obstacleSet  = new HashSet<>();
+        for(int[] obstacle :obstacles){
+            long ox = obstacle[0]+30000;
+            long oy = obstacle[1]+30000;
+            obstacleSet.add((ox<<16)+oy);
+        }
+        //循环计算每走一步的欧式距离，判断状态
+        int ans = 0 ;
+        for(int cmd:commands){
+            //左转状态
+            if(cmd == -2){
+                di = (di+3)%4;
+            }else if(cmd == -1){
+                di =(di+1)%4;
+            }else {
+                for (int i = 0; i <cmd ; i++) {
+                    int nx  = x +dx[di];
+                    int ny  = y +dy[di];
+                    long code =((nx+30000)<<16)+(ny+30000);
+                    if(!obstacleSet.contains(code)){
+                        x = nx ;
+                        y = ny ;
+                        ans=Math.max(ans,x*x+y*y);
+                    }
+                }
+            }
+        }
+        return  ans ;
     }
+
+
+    private static void printInfo(int num){
+        System.out.println(Integer.toBinaryString(num));
+    }
+
+    public static void main(String[] args) {
+        int[][] obstacles = {{1,2}};
+        int[] commands = {4,-1,3};
+        int result = robotSim(commands,obstacles);
+        System.out.println(result);
+    }
+
+
 }
