@@ -12,9 +12,10 @@ public class Test {
         obj.getMin();
         obj.pop();
         obj.getMin();*/
-        int[] arr = {1,2,3};
-        Test384 obj = new Test384(arr);
-        int[] outcome = obj.shuffle();
+        //int[] arr = {1,2,3};
+        //Test384 obj = new Test384(arr);
+       // int[] outcome = obj.shuffle();
+        System.out.println(false == false);
 
     }
 }
