@@ -85,13 +85,5 @@ public   class Test884 {
 
     }
 
-    public static void main(String[] args) {
-        //String A = "fd kss fd" ,B = "fd fd kss" ;
-        String A = "this apple is sweet", B = "this apple is sour" ;
-        String[] str = uncommonFromSentences1(A,B);
-        System.out.println(str);
-        for (int i = 0; i <str.length ; i++) {
-            System.out.println(str[i]);
-        }
-    }
+
 }
