@@ -17,5 +17,10 @@ public class Test {
        // int[] outcome = obj.shuffle();
         System.out.println(false == false);
 
+
+        String s1 ="adfb";
+        char[] s1Arr = s1.toCharArray();
+        System.out.println(s1Arr[0]);
+
     }
 }
